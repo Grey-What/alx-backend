@@ -42,7 +42,7 @@ def before_request() -> None:
 
 @babel.localeselector
 def get_locale():
-    """get locale"""
+    """get locale and return it"""
     if (request.args.get('locale')
        and request.args.get('locale') in app.config['LANGUAGES']):
         return request.args.get('locale')
@@ -56,4 +56,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="5000", debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
