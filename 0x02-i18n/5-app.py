@@ -4,6 +4,7 @@ This is an example app for the 0x02-i18n project.
 """
 from flask import Flask, render_template, request, g
 from flask_babel import Babel
+from typing import Union, Dict
 
 
 users = {
@@ -26,7 +27,7 @@ babel = Babel(app)
 app.config.from_object(Config)
 
 
-def get_user():
+def get_user() -> Union[Dict, None]:
     """return user dictionary else None"""
     if request.args.get('login_as'):
         return users.get(int(request.args.get('login_as')))
@@ -41,7 +42,7 @@ def before_request() -> None:
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """get locale and return it"""
     if (request.args.get('locale')
        and request.args.get('locale') in app.config['LANGUAGES']):
@@ -50,7 +51,7 @@ def get_locale():
 
 
 @app.route('/', strict_slashes=False)
-def index():
+def index() -> str:
     """simple main index route"""
     return render_template('5-index.html')
 
