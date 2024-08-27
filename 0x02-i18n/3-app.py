@@ -2,7 +2,7 @@
 """
 This is an example app for the 0x02-i18n project.
 """
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template, request
 from flask_babel import Babel, _
 
 
@@ -19,13 +19,13 @@ app.config.from_object(Config)
 
 
 @babel.localeselector
-def get_locale() -> str:
+def get_locale():
     """get locale"""
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 @app.route('/', strict_slashes=False)
-def index() -> Response:
+def index():
     """simple main index route"""
     return render_template('3-index.html')
 
