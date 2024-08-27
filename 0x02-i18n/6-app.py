@@ -25,7 +25,6 @@ users = {
 }
 
 
-
 def get_user():
     """return user dictionary else None"""
     if request.args.get('login_as'):
