@@ -6,6 +6,8 @@ from flask import Flask, render_template, request, g
 from flask_babel import Babel
 from pytz import timezone
 import pytz.exceptions
+from datetime import datetime
+import locale
 
 
 class Config(object):
@@ -18,6 +20,7 @@ class Config(object):
 app = Flask(__name__)
 babel = Babel(app)
 app.config.from_object(Config)
+
 
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
@@ -39,6 +42,11 @@ def before_request() -> None:
     """get user and set global user"""
     user = get_user()
     g.user = user
+
+    cur_time = pytz.utc.localize(datetime.utcnow())
+    time = cur_time.astimezone(timezone(get_timezone()))
+    locale.setlocale(locale.LC_TIME, (get_locale(), 'UTF-8'))
+    g.time = time.strftime("%b %d, %Y %I:%M:%S %p")
 
 
 @babel.timezoneselector
@@ -82,7 +90,7 @@ def get_locale():
 @app.route('/', strict_slashes=False)
 def index():
     """simple main index route"""
-    return render_template('7-index.html')
+    return render_template('index.html')
 
 
 if __name__ == "__main__":
