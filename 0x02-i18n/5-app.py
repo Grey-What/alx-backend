@@ -29,8 +29,9 @@ app.config.from_object(Config)
 
 def get_user() -> Union[Dict, None]:
     """return user dictionary else None"""
-    if request.args.get('login_as'):
-        return users.get(int(request.args.get('login_as')))
+    login_id = request.args.get('login_as')
+    if login_id:
+        return users.get(int(login_id))
     return None
 
 
