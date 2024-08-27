@@ -2,7 +2,7 @@
 """
 This is an example app for the 0x02-i18n project.
 """
-from flask import Flask, render_template, Response
+from flask import Flask, render_template
 from flask_babel import Babel
 
 
