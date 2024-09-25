@@ -15,7 +15,7 @@ function setNewSchool(schoolName, value) {
     client.set(schoolName, value, print);
 }
 
-asyncGet = promisify(client.get).bind(client);
+const asyncGet = promisify(client.get).bind(client);
 
 async function displaySchoolValue(schoolName) {
     const value = await asyncGet(schoolName).catch((error) => {
